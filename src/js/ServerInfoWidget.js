@@ -35,7 +35,8 @@ class ServerInfoWidget {
         }
         this.gameCharts = {
             sandstorm: ['serverRank', 'timePlayed', 'playerCount', 'newPlayers'],
-            minecraft: ['groupRank', 'playerCount']
+            minecraft: ['groupRank', 'playerCount'],
+            arma3: ['serverRank', 'timePlayed', 'playerCount', 'newPlayers']
         }
 
         this.initWorkspace()
@@ -236,6 +237,25 @@ class ServerInfoWidget {
                     ['Modded',                  attr.details.minecraft_modded.toString()],
                 ];
                 break;
+
+            case 'arma3':
+                tableData = [
+                    ['Server Rank',             `#${attr.rank}`],
+                    ['Player count',            `${attr.players}/${attr.maxPlayers}`],
+                    ['Address',                 `${attr.address ?? attr.ip}:${attr.port} (Game port),<br> ${attr.address ?? attr.ip}:${attr.portQuery} (Query port)`],
+                    ['Status',                  attr.status],
+                    ['Country',                 attr.country],
+                    ['Uptime',                  `7 Days: <span>${uptime['7']}%</span>, 30 Days: <span>${uptime['30']}%</span>`],
+                    ['Map',                     attr.details.map],
+                    ['Mission',                 attr.details.mission],
+                    ['Version',                 attr.details.version],
+                    ['Mods',                    attr.details.modNames.join(', ')],
+                    ['Signatures',              attr.details.sigs.join(', ')],
+
+                ];
+                break;
+            default:
+                return;
         }
         table.innerHTML = tableData.map(el => `<tr><td>${el[0]}</td><td>${el[1]}</td></tr>`).join('')
         this.parentBlock.querySelector('.info').appendChild(title)
