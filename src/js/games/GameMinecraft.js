@@ -1,4 +1,4 @@
-import GameBaseClass from "./GameBaseClass";
+import GameBaseClass from "../GameBaseClass";
 
 class GameMinecraft extends GameBaseClass {
     buildTableData(attr) {

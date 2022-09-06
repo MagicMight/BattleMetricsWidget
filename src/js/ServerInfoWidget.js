@@ -1,9 +1,6 @@
 import moment from 'moment';
 import {LineChart} from 'chartist';
-
-import GameMinecraft from "./games/GameMinecraft";
-import GameSandstorm from "./games/GameSandstorm";
-import GameArma3 from "./games/GameArma3";
+import {Minecraft, Sandstorm, Arma3} from './games'
 
 class ServerInfoWidget {
     constructor(parentNode) {
@@ -217,15 +214,15 @@ class ServerInfoWidget {
         let tableData;
         switch (this.game) {
             case 'sandstorm':
-                tableData = new GameSandstorm(attr).getTableData();
+                tableData = new Sandstorm(attr).getTableData();
                 break;
 
             case 'minecraft':
-                tableData = new GameMinecraft(attr).getTableData();
+                tableData = new Minecraft(attr).getTableData();
                 break;
 
             case 'arma3':
-                tableData = new GameArma3(attr).getTableData();
+                tableData = new Arma3(attr).getTableData();
                 break;
 
             default:

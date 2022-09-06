@@ -1,4 +1,4 @@
-import GameBaseClass from "./GameBaseClass";
+import GameBaseClass from "../GameBaseClass";
 
 class GameArma3 extends GameBaseClass {
     buildTableData(attr) {

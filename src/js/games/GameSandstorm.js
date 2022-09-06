@@ -1,4 +1,4 @@
-import GameBaseClass from "./GameBaseClass";
+import GameBaseClass from "../GameBaseClass";
 
 class GameSandstorm extends GameBaseClass {
     buildTableData(attr) {
