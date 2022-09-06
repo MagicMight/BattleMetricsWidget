@@ -4,7 +4,7 @@ class GameMinecraft extends GameBaseClass {
     buildTableData(attr) {
         return [
             ['Server Rank',     `#${attr.rank}`],
-            ['Group Rank',      `#${included.filter(el => el.type === 'serverGroup')[0].attributes.rank}`],
+            ['Group Rank',      `#${attr.included.filter(el => el.type === 'serverGroup')[0].attributes.rank}`],
             ['Player count',    `${attr.players}/${attr.maxPlayers}`],
             ['Address',         `${attr.address ?? attr.ip}:${attr.port}`],
             ['Status',          attr.status],

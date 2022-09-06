@@ -205,7 +205,8 @@ class ServerInfoWidget {
         let url = `https://api.battlemetrics.com/servers/${this.serverId}?include=session,uptime:7,uptime:30,serverEvent,serverGroup,serverDescription,orgDescription&relations[server]=game,serverGroup,organization,orgGroup&relations[session]=server,player&fields[server]=id,name,address,ip,port,portQuery,players,maxPlayers,rank,createdAt,updatedAt,location,country,status,details,queryStatus&fields[session]=start,stop,firstTime,name&fields[orgDescription]=public,approvedAt`
         let {data: {attributes: attr}, included: included} = await (await fetch(url)).json()
         attr['uptime'] = {}
-        for (let el of included) {
+        attr['included'] = included
+        for (let el of attr.included) {
             if (el.type !== 'serverUptime') continue
             attr.uptime[el.id.split(':')[1]] = el.attributes.value * 100
         }
