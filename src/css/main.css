@@ -1,3 +1,4 @@
+@import '../../node_modules/chartist/dist/index.css';
 .gameserver-info {
     background-color: #222222;
     color: #eee !important;

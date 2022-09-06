@@ -1,3 +1,10 @@
+import moment from 'moment';
+import {LineChart} from 'chartist';
+
+import GameMinecraft from "./games/GameMinecraft";
+import GameSandstorm from "./games/GameSandstorm";
+import GameArma3 from "./games/GameArma3";
+
 class ServerInfoWidget {
     constructor(serverId, game, parentSelector) {
         this.serverId = serverId
@@ -167,7 +174,7 @@ class ServerInfoWidget {
     createChart(name, title, labels, series, additionalOptions = {})
     {
         this.charts[name].dom.innerHTML = '<h3>' + title + '</h3>'
-        new Chartist.Line(
+        new LineChart(
             '#' + this.charts[name].id,
             {
                 labels: labels,
@@ -197,10 +204,10 @@ class ServerInfoWidget {
         table.className = 'info-table';
         let url = `https://api.battlemetrics.com/servers/${this.serverId}?include=session,uptime:7,uptime:30,serverEvent,serverGroup,serverDescription,orgDescription&relations[server]=game,serverGroup,organization,orgGroup&relations[session]=server,player&fields[server]=id,name,address,ip,port,portQuery,players,maxPlayers,rank,createdAt,updatedAt,location,country,status,details,queryStatus&fields[session]=start,stop,firstTime,name&fields[orgDescription]=public,approvedAt`
         let {data: {attributes: attr}, included: included} = await (await fetch(url)).json()
-        let uptime = {}
+        attr['uptime'] = {}
         for (let el of included) {
             if (el.type !== 'serverUptime') continue
-            uptime[el.id.split(':')[1]] = el.attributes.value * 100
+            attr.uptime[el.id.split(':')[1]] = el.attributes.value * 100
         }
         console.log(attr)
 
@@ -209,51 +216,17 @@ class ServerInfoWidget {
         let tableData;
         switch (this.game) {
             case 'sandstorm':
-                tableData = [
-                    ['Rank',                    `#${attr.rank}`],
-                    ['Player count',            `${attr.players}/${attr.maxPlayers}`],
-                    ['Address',                 `${attr.address ?? attr.ip}:${attr.port} (Game port),<br> ${attr.address ?? attr.ip}:${attr.portQuery} (Query port)`],
-                    ['Status',                  attr.status],
-                    ['Country',                 attr.country],
-                    ['Uptime',                  `7 Days: <span>${uptime['7']}%</span>, 30 Days: <span>${uptime['30']}%</span>`],
-                    ['Password Protected',      attr.details.password.toString()],
-                    ['Map',                     attr.details.map],
-                    ['COOP',                    attr.details.sandstorm_coop.toString()],
-                    ['Game Mode',               attr.details.gameMode],
-                    ['Official Match Server',   attr.details.official.toString()],
-                ];
+                tableData = new GameSandstorm(attr).getTableData();
                 break;
 
             case 'minecraft':
-                tableData = [
-                    ['Server Rank',             `#${attr.rank}`],
-                    ['Group Rank',              `#${included.filter(el => el.type === 'serverGroup')[0].attributes.rank}`],
-                    ['Player count',            `${attr.players}/${attr.maxPlayers}`],
-                    ['Address',                 `${attr.address ?? attr.ip}:${attr.port}`],
-                    ['Status',                  attr.status],
-                    ['Country',                 attr.country],
-                    ['Uptime',                  `7 Days: <span>${uptime['7']}%</span>, 30 Days: <span>${uptime['30']}%</span>`],
-                    ['Version',                 `${attr.details.minecraft_version_name} (${attr.details.minecraft_version.name}, Protocol: ${attr.details.minecraft_version.protocol})`],
-                    ['Modded',                  attr.details.minecraft_modded.toString()],
-                ];
+                tableData = new GameMinecraft(attr).getTableData();
                 break;
 
             case 'arma3':
-                tableData = [
-                    ['Server Rank',             `#${attr.rank}`],
-                    ['Player count',            `${attr.players}/${attr.maxPlayers}`],
-                    ['Address',                 `${attr.address ?? attr.ip}:${attr.port} (Game port),<br> ${attr.address ?? attr.ip}:${attr.portQuery} (Query port)`],
-                    ['Status',                  attr.status],
-                    ['Country',                 attr.country],
-                    ['Uptime',                  `7 Days: <span>${uptime['7']}%</span>, 30 Days: <span>${uptime['30']}%</span>`],
-                    ['Map',                     attr.details.map],
-                    ['Mission',                 attr.details.mission],
-                    ['Version',                 attr.details.version],
-                    ['Mods',                    attr.details.modNames.join(', ')],
-                    ['Signatures',              attr.details.sigs.join(', ')],
-
-                ];
+                tableData = new GameArma3(attr).getTableData();
                 break;
+
             default:
                 return;
         }
@@ -263,3 +236,6 @@ class ServerInfoWidget {
     }
 
 }
+
+
+export default ServerInfoWidget;
