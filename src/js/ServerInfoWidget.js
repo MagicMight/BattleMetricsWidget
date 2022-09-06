@@ -6,13 +6,13 @@ import GameSandstorm from "./games/GameSandstorm";
 import GameArma3 from "./games/GameArma3";
 
 class ServerInfoWidget {
-    constructor(serverId, game, parentSelector) {
-        this.serverId = serverId
-        this.game = game
+    constructor(parentNode) {
+        this.serverId = parentNode.dataset.serverid
+        this.game = parentNode.dataset.game
         this.monthAgo = moment().subtract(1, 'M').format('YYYY-MM-DD') + 'T00:00:00.000Z'
         this.weekAgo = moment().subtract(1, 'w').format('YYYY-MM-DD') + 'T00:00:00.000Z'
         this.today = moment().format('YYYY-MM-DD') + 'T00:00:00.000Z'
-        this.parentBlock = document.querySelector(parentSelector)
+        this.parentBlock = parentNode
         this.charts = {
             serverRank: {
                 id: undefined,
