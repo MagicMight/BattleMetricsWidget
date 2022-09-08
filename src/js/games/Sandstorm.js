@@ -1,6 +1,6 @@
-import GameBaseClass from "../GameBaseClass";
+import BaseGame from "../BaseGame";
 
-class GameSandstorm extends GameBaseClass {
+class Sandstorm extends BaseGame {
     buildTableData(attr) {
         return [
             ['Rank',                    `#${attr.rank}`],
@@ -16,6 +16,10 @@ class GameSandstorm extends GameBaseClass {
             ['Official Match Server',   attr.details.official.toString()],
         ]
     }
+
+    getGameCharts() {
+        return ['serverRank', 'timePlayed', 'playerCount', 'newPlayers']
+    }
 }
 
-export default GameSandstorm;
+export default Sandstorm;

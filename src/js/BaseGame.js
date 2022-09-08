@@ -1,4 +1,4 @@
-class GameBaseClass
+class BaseGame
 {
     constructor(attr) {
         this.attr = attr;
@@ -14,6 +14,8 @@ class GameBaseClass
     getTableData() {
         return this.tableData;
     }
+
+    getGameCharts() {}
 }
 
-export default GameBaseClass;
+export default BaseGame;

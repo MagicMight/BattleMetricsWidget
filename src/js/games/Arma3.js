@@ -1,6 +1,6 @@
-import GameBaseClass from "../GameBaseClass";
+import BaseGame from "../BaseGame";
 
-class GameArma3 extends GameBaseClass {
+class Arma3 extends BaseGame {
     buildTableData(attr) {
         return [
             ['Server Rank',             `#${attr.rank}`],
@@ -16,6 +16,10 @@ class GameArma3 extends GameBaseClass {
             ['Signatures',              attr.details.sigs.join(', ')]
         ]
     }
+
+    getGameCharts() {
+        return ['serverRank', 'timePlayed', 'playerCount', 'newPlayers']
+    }
 }
 
-export default GameArma3;
+export default Arma3;

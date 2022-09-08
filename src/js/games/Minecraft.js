@@ -1,6 +1,6 @@
-import GameBaseClass from "../GameBaseClass";
+import BaseGame from "../BaseGame";
 
-class GameMinecraft extends GameBaseClass {
+class Minecraft extends BaseGame {
     buildTableData(attr) {
         return [
             ['Server Rank',     `#${attr.rank}`],
@@ -14,6 +14,10 @@ class GameMinecraft extends GameBaseClass {
             ['Modded',          attr.details.minecraft_modded.toString()],
         ]
     }
+
+    getGameCharts() {
+        return ['groupRank', 'playerCount']
+    }
 }
 
-export default GameMinecraft;
+export default Minecraft;

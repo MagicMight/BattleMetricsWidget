@@ -1,7 +1,6 @@
-import GameArma3 from './GameArma3';
-import GameSandstorm from "./GameSandstorm";
-import GameMinecraft from "./GameMinecraft";
+import Arma3 from "./Arma3";
+import Sandstorm from "./Sandstorm";
+import Minecraft from "./Minecraft";
+import Ark from "./Ark";
 
-export {GameArma3 as Arma3}
-export {GameSandstorm as Sandstorm}
-export {GameMinecraft as Minecraft}
+export {Arma3, Sandstorm, Minecraft, Ark}
