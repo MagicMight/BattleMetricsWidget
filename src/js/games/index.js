@@ -3,4 +3,9 @@ import Sandstorm from "./Sandstorm";
 import Minecraft from "./Minecraft";
 import Ark from "./Ark";
 
-export {Arma3, Sandstorm, Minecraft, Ark}
+export {
+    Arma3,
+    Sandstorm,
+    Minecraft,
+    Ark
+}

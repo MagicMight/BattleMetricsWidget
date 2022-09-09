@@ -1,4 +1,5 @@
-import BaseGame from "../BaseGame";
+import BaseGame from "./BaseGame";
+import {NewPlayers, PlayerCount, ServerRank, TimePlayed} from "../charts";
 
 class Arma3 extends BaseGame {
     buildTableData(attr) {
@@ -18,7 +19,7 @@ class Arma3 extends BaseGame {
     }
 
     getGameCharts() {
-        return ['serverRank', 'timePlayed', 'playerCount', 'newPlayers']
+        return [ServerRank, TimePlayed, PlayerCount, NewPlayers]
     }
 }
 

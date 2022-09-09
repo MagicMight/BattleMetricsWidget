@@ -1,4 +1,5 @@
-import BaseGame from "../BaseGame";
+import BaseGame from "./BaseGame";
+import {GroupRank, PlayerCount} from "../charts";
 
 class Minecraft extends BaseGame {
     buildTableData(attr) {
@@ -16,7 +17,7 @@ class Minecraft extends BaseGame {
     }
 
     getGameCharts() {
-        return ['groupRank', 'playerCount']
+        return [GroupRank, PlayerCount]
     }
 }
 

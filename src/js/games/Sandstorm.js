@@ -1,4 +1,5 @@
-import BaseGame from "../BaseGame";
+import BaseGame from "./BaseGame";
+import {NewPlayers, PlayerCount, ServerRank, TimePlayed} from "../charts";
 
 class Sandstorm extends BaseGame {
     buildTableData(attr) {
@@ -18,7 +19,7 @@ class Sandstorm extends BaseGame {
     }
 
     getGameCharts() {
-        return ['serverRank', 'timePlayed', 'playerCount', 'newPlayers']
+        return [ServerRank, TimePlayed, PlayerCount, NewPlayers]
     }
 }
 

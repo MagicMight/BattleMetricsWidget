@@ -15,7 +15,9 @@ class BaseGame
         return this.tableData;
     }
 
-    getGameCharts() {}
+    getGameCharts() {
+        return []
+    }
 }
 
 export default BaseGame;
