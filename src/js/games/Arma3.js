@@ -1,21 +1,26 @@
-import GameBaseClass from "../GameBaseClass";
+import BaseGame from "./BaseGame";
+import {NewPlayers, PlayerCount, ServerRank, TimePlayed} from "../charts";
 
-class GameSandstorm extends GameBaseClass {
+class Arma3 extends BaseGame {
     buildTableData(attr) {
         return [
-            ['Rank',                    `#${attr.rank}`],
+            ['Server Rank',             `#${attr.rank}`],
             ['Player count',            `${attr.players}/${attr.maxPlayers}`],
             ['Address',                 `${attr.address ?? attr.ip}:${attr.port} (Game port),<br> ${attr.address ?? attr.ip}:${attr.portQuery} (Query port)`],
             ['Status',                  attr.status],
             ['Country',                 attr.country],
             ['Uptime',                  `7 Days: <span>${attr.uptime['7']}%</span>, 30 Days: <span>${attr.uptime['30']}%</span>`],
-            ['Password Protected',      attr.details.password.toString()],
             ['Map',                     attr.details.map],
-            ['COOP',                    attr.details.sandstorm_coop.toString()],
-            ['Game Mode',               attr.details.gameMode],
-            ['Official Match Server',   attr.details.official.toString()],
+            ['Mission',                 attr.details.mission],
+            ['Version',                 attr.details.version],
+            ['Mods',                    attr.details.modNames.join(', ')],
+            ['Signatures',              attr.details.sigs.join(', ')]
         ]
+    }
+
+    getGameCharts() {
+        return [ServerRank, TimePlayed, PlayerCount, NewPlayers]
     }
 }
 
-export default GameSandstorm;
+export default Arma3;

@@ -3,8 +3,8 @@ import ServerInfoWidget from './js/ServerInfoWidget';
 
 window.addEventListener('DOMContentLoaded', () => {
     let divs = document.getElementsByClassName('battlemetrics-widget')
-    for (let idx in divs) {
-        new ServerInfoWidget(divs[idx]);
+    for (let div of divs) {
+        new ServerInfoWidget(div).initWorkspace();
     }
 })
 
